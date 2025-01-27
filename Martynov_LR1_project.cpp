@@ -4,11 +4,20 @@
 using namespace std;
 
 // Прототипы функций
-int findMaxDigit(int x);
-{
-    //Реализует Мартынов А.А. в ветке branch_1
+void findMaxDigit(int x) {
+    int maxDigit = 0;
+    // Реализация функции
+    while (x > 0) {
+        int digit = x % 10;
+        if (digit > maxDigit) {
+            maxDigit = digit;
+        }
+        x /= 10;
+    }
+    cout << "Наибольшая цифра в числе: " << maxDigit << endl;
 }
-int findMinDigit(int x);
+
+void findMinDigit(int x);
 {
     //Реализует Мартынов А.А. в ветке branch_2
 }
