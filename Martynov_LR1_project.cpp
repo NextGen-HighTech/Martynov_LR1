@@ -19,7 +19,16 @@ void findMaxDigit(int x) {
 
 void findMinDigit(int x);
 {
-    //Реализует Мартынов А.А. в ветке branch_2
+    int minDigit = 9;
+    // Реализация функции
+    while (x > 0) {
+        int digit = x % 10;
+        if (digit < minDigit) {
+            minDigit = digit;
+        }
+        x /= 10;
+    }
+    cout << "Наименьшая цифра в числе: " << minDigit << endl;
 }
 
 int main() {
