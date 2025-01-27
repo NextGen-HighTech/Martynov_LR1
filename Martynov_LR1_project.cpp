@@ -1,12 +1,28 @@
 #include <iostream>
 #include <climits>
+#include <limits>
+
 
 using namespace std;
 
-// Прототипы функций
+int inputNumber() {
+    int x;
+    while (true) {
+        cout << "Введите натуральное число X: ";
+        cin >> x;
+        
+        if (cin.fail() || x <= 0) {
+            cout << "Ошибка: должно быть положительное целое число." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        } else {
+            return x;
+        }
+    }
+}
+
 void findMaxDigit(int x) {
     int maxDigit = 0;
-    // Реализация функции
     while (x > 0) {
         int digit = x % 10;
         if (digit > maxDigit) {
@@ -20,7 +36,6 @@ void findMaxDigit(int x) {
 void findMinDigit(int x);
 {
     int minDigit = 9;
-    // Реализация функции
     while (x > 0) {
         int digit = x % 10;
         if (digit < minDigit) {
@@ -36,37 +51,30 @@ int main() {
     int number;
 
     while (true) {
-        // Вывод меню
         cout << "Меню:" << endl;
         cout << "1. Ввести натуральное число X" << endl;
         cout << "2. Найти наибольшую цифру в записи числа X" << endl;
         cout << "3. Найти наименьшую цифру в записи числа X" << endl;
         cout << "4. Выход" << endl;
         cout << "Выберите пункт меню: ";
-        cin >> choice;
+
+        if (!(cin >> choice))
+         {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Ошибка ввода. Попробуйте снова." << endl;
+            continue;
+        }
 
         switch (choice) {
             case 1:
-                cout << "Введите натуральное число X: ";
-                cin >> number;
-                if (number <= 0) {
-                    cout << "Ошибка: число должно быть натуральным (больше 0)." << endl;
-                    number = 0;
-                }
+                number = inputNumber();
                 break;
             case 2:
-                if (number <= 0) {
-                    cout << "Ошибка: число X не введено или введено некорректно." << endl;
-                } else {
-                    findMaxDigit(number);
-                }
+                findMaxDigit(number);
                 break;
             case 3:
-                if (number <= 0) {
-                    cout << "Ошибка: число X не введено или введено некорректно." << endl;
-                } else {
-                    findMinDigit(number);
-                }
+                findMinDigit(number);
                 break;
             case 4:
                 cout << "Выход из программы." << endl;
